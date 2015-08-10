@@ -1,0 +1,24 @@
+{
+  "name": "error-throwing-middleware",
+  "version": "0.0.1",
+  "description": "Express middleware that randomly throws errors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Sequoia/error-throwing-middleware.git"
+  },
+  "keywords": [
+    "express",
+    "error",
+    "demo"
+  ],
+  "author": "Sequoia McDowell <sequoia.mcdowell@gmail.com> (http://sequoia.makes.software/)",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/Sequoia/error-throwing-middleware/issues"
+  },
+  "homepage": "https://github.com/Sequoia/error-throwing-middleware"
+}
