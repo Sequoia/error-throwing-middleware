@@ -6,8 +6,6 @@ var errs = [
   [ 418, 'I\'m a teapot']
 ];
 
-var frequency = 0.6; //throw ~60% of time
-
 function shouldThrow(threshold){
   return Math.random() < threshold;
 }
@@ -22,10 +20,14 @@ function makeError(err){
   return e;
 }
 
-module.exports = function(req, res, next){
-  if(shouldThrow(frequency)){
-    next(makeError(pickRandom(errs)));
-  }else{
-    next();
+module.exports = function (opts) {
+  opts = opts || {}
+  var frequency = opts.frequency || 0.6 // throw ~60% of time
+  return function(req, res, next){
+    if(shouldThrow(frequency)){
+      next(makeError(pickRandom(errs)));
+    }else{
+      next();
+    }
   }
 };
