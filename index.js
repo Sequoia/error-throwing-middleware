@@ -29,3 +29,13 @@ module.exports = function(req, res, next){
     next();
   }
 };
+
+module.exports.frequency = function(freq){
+  return function (req, res, next){
+    if(shouldThrow(freq)){
+      next(makeError(pickRandom(errs)));
+    }else{
+      next();
+    }
+  }
+};
