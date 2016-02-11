@@ -1,12 +1,12 @@
 var errs = [
   [ 503, 'Uhoh something went wrong!'],
   [ 501, 'Oh wow, 501.. that sounds bad :/'],
-  ['ENOENT', 'They went to search for the ENTwives'],
-  ['EACCES', 'We could not afford a second "S" :('],
+  ['ENOENT', 'no such file or directory \'cake\''],
+  ['EACCES', 'permission denied, mkdir \'/Users/sequoia/cake\''],
   [ 418, 'I\'m a teapot']
 ];
 
-var frequency = 0.6; //throw ~60% of time
+var defaultFrequency = 0.6; //throw ~60% of time
 
 function shouldThrow(threshold){
   return Math.random() < threshold;
@@ -22,20 +22,15 @@ function makeError(err){
   return e;
 }
 
-module.exports = function(req, res, next){
-  if(shouldThrow(frequency)){
-    next(makeError(pickRandom(errs)));
-  }else{
-    next();
-  }
-};
-
-module.exports.frequency = function(freq){
+function thrower(frequency){
   return function (req, res, next){
-    if(shouldThrow(freq)){
+    if(shouldThrow(frequency)){
       next(makeError(pickRandom(errs)));
     }else{
       next();
     }
-  }
-};
+  };
+}
+
+module.exports = thrower(defaultFrequency);
+module.exports.frequency = thrower;
